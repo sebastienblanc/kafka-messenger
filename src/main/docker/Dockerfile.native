@@ -1,0 +1,8 @@
+FROM registry.access.redhat.com/ubi8/openjdk-11
+ENV BOOTSTRAP_SERVERS my-cluster-kafka-bootstrap:9092
+ENV TOPIC my-topic
+WORKDIR /work/
+COPY target/*.jar /work/app.jar
+COPY in_container_curl.sh /work/in_container_curl.sh
+EXPOSE 8080
+CMD java -jar app.jar -Dquarkus.http.host=0.0.0.0
